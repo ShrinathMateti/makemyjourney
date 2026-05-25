@@ -35,7 +35,7 @@ const Contact = () => {
 
       {/* Section Heading */}
       <section className="text-white py-10">
-        <h1 className="text-center font-semibold text-4xl mt-10">GET IN TOUCH</h1>
+        <h1 className="text-center font-semibold text-4xl mt-10">Get In Touch</h1>
         <p className="text-center text-lg">Have any queries? Get in touch today.</p>
       </section>
 
@@ -62,7 +62,7 @@ const Contact = () => {
               </div>
               <div>
                 <h4 className="text-lg font-semibold mb-1">E-mail Us</h4>
-                <p className="text-sm text-slate-700">makemakejourney@info</p>
+                <p className="text-sm text-slate-700">makemyjourney@info</p>
               </div>
             </div>
 

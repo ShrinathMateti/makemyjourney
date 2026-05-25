@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FaPlane } from "react-icons/fa";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaPlane, FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,39 +14,53 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 z-50">
-      <div className="max-w-screen-xl flex items-center justify-between mx-auto px-5 py-4">
+    <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-5 py-4">
+        
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
+        <a
+          href="/"
+          className="flex items-center gap-2 shrink-0"
+        >
           <FaPlane className="text-3xl md:text-4xl text-slate-800" />
-          <span className="text-2xl md:text-3xl font-bold text-slate-800">
+
+          <span className="text-2xl md:text-3xl font-bold text-slate-800 whitespace-nowrap">
             Make My Journey
           </span>
         </a>
 
-        {/* Mobile Toggle Button */}
+        {/* Toggle Button */}
         <button
-          className="md:hidden text-slate-700 text-2xl focus:outline-none"
+          className="md:hidden text-slate-700 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? (
+            <FaTimes className="w-8 h-8" />
+          ) : (
+            <FaBars className="w-8 h-8" />
+          )}
         </button>
 
-        {/* Nav Links */}
+        {/* Navigation Links */}
         <div
-          className={`${isOpen ? "block" : "hidden"} w-full md:block md:w-auto`}
+          className={`${
+            isOpen ? "block" : "hidden"
+          } w-full md:block md:w-auto`}
         >
-          <ul className="flex flex-col md:flex-row md:space-x-8 p-5 md:p-0 bg-white md:bg-transparent">
+          <ul className="flex flex-col md:flex-row md:items-center md:space-x-8 mt-4 md:mt-0 p-4 md:p-0 bg-white md:bg-transparent rounded-lg">
+            
             {navLinks.map((link, idx) => (
               <li key={idx}>
                 <a
                   href={link.href}
-                  className="block py-2 px-3 text-slate-700 font-medium hover:text-blue-700 hover:text-red-700"
+                  className="block py-2 px-3 text-slate-700 font-medium hover:text-blue-700 transition duration-300"
+                  onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </a>
               </li>
             ))}
+
           </ul>
         </div>
       </div>

@@ -1,51 +1,107 @@
+import { motion } from "framer-motion";
 
+const destinations = [
+  {
+    image: "dest1.jpg",
+    name: "Sikkim",
+  },
+  {
+    image: "dest2.jpg",
+    name: "Darjeeling",
+  },
+  {
+    image: "dest3.jpg",
+    name: "Gangtok",
+  },
+];
 
 const Destinations = () => {
   return (
-    <div>
-      <section id="destinations" className="bg-blue-100 py-10">
-        <h1 className="text-center text-slate-800 font-semibold text-4xl mt-10">
-          TOUR OF <span className="text-red-700">ASTONISHING DESTINATION</span>
-        </h1>
-      </section>
-      <section>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-6 bg-blue-100">
-          <div className="flex flex-col items-center p-12 cursor-pointer">
-            <img
-              className="w-full rounded-t-lg"
-              src="dest1.jpg"
-              alt="sikkim"
-            />
-            <h1 className="text-slate-800 text-lg rounded-b-lg bg-white w-full text-center font-semibold">
-              SIKKIM
-            </h1>
-          </div>
-          <div className="flex flex-col items-center p-12 cursor-pointer">
-            <img
-              className="w-full rounded-t-lg"
-              src="dest2.jpg"
-              alt="darjeeling"
-            />
-            <h1 className="text-slate-800 text-lg rounded-b-lg bg-white w-full text-center font-semibold">
-              DARJEELING
-            </h1>
-          </div>
-          <div className="flex flex-col items-center p-12 cursor-pointer">
-            <img
-              className="w-full rounded-t-lg"
-              src="dest3.jpg"
-              alt="gangtok"
-            />
-            <h1 className="text-slate-800 text-lg rounded-b-lg bg-white w-full text-center font-semibold">
-              GANGTOK
-            </h1>
-          </div>
+    <section
+      id="destinations"
+      className="relative overflow-hidden py-24 bg-slate-50"
+    >
+      {/* Background Blur */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-slate-200 rounded-full blur-3xl opacity-50"></div>
+
+      <div className="max-w-screen-xl mx-auto px-6">
+        {/* HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-14"
+        >
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">
+            Explore Astonishing
+            <span className="block">Travel Destinations</span>
+          </h1>
+        </motion.div>
+
+        {/* DESTINATION GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          {destinations.map((place, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: index * 0.1,
+              }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6 }}
+              className="group relative overflow-hidden rounded-[28px] cursor-pointer"
+            >
+              {/* IMAGE */}
+              <div className="overflow-hidden rounded-[28px]">
+                <img
+                  src={place.image}
+                  alt={place.name}
+                  className="w-full h-[420px] object-cover group-hover:scale-105 transition duration-700"
+                />
+              </div>
+
+              {/* OVERLAY */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent rounded-[28px]" />
+
+              {/* CONTENT */}
+              <div className="absolute bottom-0 left-0 p-7">
+                <p className="text-white/70 uppercase tracking-[3px] text-xs mb-2">
+                  Luxury Destination
+                </p>
+
+                <h2 className="text-3xl font-bold text-white">{place.name}</h2>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </section>
-      <section className="bg-slate-800 py-10">
-        <h1 className="text-center text-4xl text-white font-semibold">BEST SERVICE WE STRIVE TO PROVIDE <br/> OUR CUSTOMERS</h1>
-      </section>
-    </div>
+
+        {/* BOTTOM STRIP */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="mt-24 bg-slate-900 rounded-[32px] px-8 py-14 md:px-16 text-center"
+        >
+          <p className="uppercase tracking-[4px] text-slate-400 text-xs mb-4">
+            Why Choose Us
+          </p>
+
+          <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight">
+            Best Service We Strive
+            <span className="block">To Provide Our Customers</span>
+          </h2>
+
+          <p className="max-w-2xl mx-auto mt-6 text-slate-400 leading-relaxed">
+            Seamless travel planning, premium experiences, and unforgettable
+            journeys crafted with care and attention to every detail.
+          </p>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

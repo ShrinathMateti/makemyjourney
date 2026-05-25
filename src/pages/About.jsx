@@ -1,47 +1,167 @@
+import { motion } from "framer-motion";
+
 const About = () => {
   return (
     <div className="mt-16 mb-32">
-      {/* Hero Section */}
       <section
         id="about"
-        className="relative h-40 bg-cover bg-center flex items-center justify-center"
+        className="max-w-screen-xl mx-auto px-6 py-24 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-white/50 flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-black mt-10">About Us</h1>
-        </div>
-      </section>
-      {/* Content Section */}
-      <section className="max-w-screen-xl mx-auto px-6 py-2 grid md:grid-cols-2 gap-10 items-center">
-        {/* Text */}
-        <div>
-          <h2 className="mt-2 text-3xl font-semibold text-slate-800 mb-4 text-center md:text-left">
-            Who We Are
-          </h2>
+        <div className="grid md:grid-cols-2 gap-20 items-center">
+          {/* LEFT CONTENT */}
+          <motion.div
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            {/* Small Tag */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+              viewport={{ once: true }}
+              className="inline-block mb-5"
+            >
+              <span className="bg-blue-100 text-blue-700 px-5 py-2 rounded-full text-sm font-semibold tracking-wide">
+                ✈️ ABOUT MAKE MY JOURNEY
+              </span>
+            </motion.div>
 
-          <p className="text-slate-600 leading-relaxed mb-4 text-xl">
-            Welcome to
-            <span className="font-semibold text-blue-600">
-              {" "}
-              Make My Journey
-            </span>
-            , your trusted travel partner. We specialize in crafting
-            personalized journeys that combine adventure, comfort, and
-            unforgettable experiences.
-          </p>
-          <p className="text-slate-600 leading-relaxed text-xl">
-            Whether you’re planning a family holiday, a romantic getaway, or an
-            adventurous trip, our mission is to make your journey seamless and
-            truly memorable.
-          </p>
-        </div>
+            {/* Heading */}
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight"
+            >
+              Explore The World
+              <span className="block text-blue-600 mt-2">With Confidence</span>
+            </motion.h2>
 
-        {/* Image */}
-        <div className="rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-          <img
-            src="about.jpg"
-            alt="About Make My Journey"
-            className="w-full h-full object-cover"
-          />
+            {/* Line */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "120px" }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="h-1 bg-blue-600 rounded-full mt-6 mb-8"
+            />
+
+            {/* Paragraph */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-slate-600 text-lg leading-relaxed mb-6"
+            >
+              Welcome to
+              <span className="font-semibold text-blue-600">
+                {" "}
+                Make My Journey
+              </span>
+              , where every destination becomes a memorable story. We create
+              personalized travel experiences designed with comfort, luxury, and
+              adventure in mind.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-slate-600 text-lg leading-relaxed mb-10"
+            >
+              From romantic escapes to thrilling adventures and family
+              vacations, our team ensures every journey feels seamless,
+              exciting, and truly unforgettable.
+            </motion.p>
+
+            {/* Modern Blue CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="flex flex-wrap items-center gap-5 mt-10"
+            >
+              {/* Primary CTA */}
+              <a
+                href="#contact"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-3 rounded-full text-base font-semibold shadow-lg shadow-blue-500/20 transition duration-300"
+              >
+                Plan Your Trip
+              </a>
+
+              {/* Secondary CTA */}
+              <a
+                href="#destinations"
+                className="flex items-center gap-2 text-blue-600 font-semibold text-base group"
+              >
+                Explore Destinations
+                <span className="transition-transform duration-300 group-hover:translate-x-2">
+                  →
+                </span>
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* RIGHT IMAGE */}
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            {/* Background Shape */}
+            <motion.div
+              animate={{
+                y: [0, 0, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+              }}
+              className="absolute -top-8 -right-8 w-64 h-64 rounded-full blur-3xl"
+            />
+
+            {/* Main Image */}
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5 }}
+              className="relative overflow-hidden rounded-[32px] shadow-2xl"
+            >
+              <img
+                src="about.jpg"
+                alt="About Make My Journey"
+                className="w-full h-[550px] object-cover"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+
+              {/* Floating Glass Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+                viewport={{ once: true }}
+                className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl px-6 py-5 text-white shadow-xl"
+              >
+                <h3 className="text-3xl font-bold mb-1">
+                  Travel Beyond Limits
+                </h3>
+
+                <p className="text-white/80 text-sm">
+                  Discover destinations crafted for unforgettable moments.
+                </p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </div>
