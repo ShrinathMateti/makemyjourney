@@ -1,96 +1,143 @@
-import { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const images = [
-  "banner2.jpeg",
-  "banner1.webp",
-  "banner3.jpg",
+const slides = [
+  {
+    image: "banner1.webp",
+    title: "Luxury Redefined",
+    subtitle: "Experience the world's most beautiful destinations",
+  },
+  {
+    image: "banner2.jpeg",
+    title: "Travel Beyond Limits",
+    subtitle: "Premium journeys crafted for unforgettable moments",
+  },
+  {
+    image: "banner3.jpg",
+    title: "Discover Paradise",
+    subtitle: "Elegant tours designed for modern explorers",
+  },
 ];
 
-const Carousel = () => {
+export default function PremiumCarousel() {
   const [current, setCurrent] = useState(0);
-  const length = images.length;
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1));
-    }, 8000);
-    return () => clearInterval(timer);
-  }, [length]);
 
   const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
+    setCurrent((prev) => (prev + 1) % slides.length);
   };
 
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-  };
+  useEffect(() => {
+    const slider = setInterval(() => {
+      nextSlide();
+    }, 7000);
+
+    return () => clearInterval(slider);
+  }, []);
 
   return (
-    <div className="relative w-full h-screen">
-      {/* Slides */}
-      <div className="overflow-hidden relative w-full h-full">
-        {images.map((img, idx) => (
-          <div
-            key={idx}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              idx === current ? "opacity-100" : "opacity-0"
-            }`}
+    <section className="relative h-screen w-full overflow-hidden bg-black">
+      {/* Background Images */}
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            opacity: { duration: 1.2 },
+            scale: { duration: 7, ease: "linear" },
+          }}
+          className="absolute inset-0"
+        >
+          <img
+            src={slides[current].image}
+            alt={slides[current].title}
+            className="h-full w-full object-cover"
+          />
+
+          {/* Dark Luxury Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Floating Glow */}
+      <div className="absolute top-[-120px] right-[-120px] w-[400px] h-[400px] bg-white/10 blur-3xl rounded-full z-10" />
+
+      {/* Main Content */}
+      <div className="relative z-20 h-full flex items-center justify-center text-center">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 w-full">
+          <motion.div
+            key={slides[current].title}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9 }}
+            className="flex flex-col items-center"
           >
-            <img
-              src={img}
-              alt={`Slide ${idx}`}
-              className="w-full h-full object-cover"
-            />
-            {/* Overlay (optional) */}
-            <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center text-white px-4">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                Explore The World
-              </h1>
-              <p className="text-lg md:text-2xl mb-6">
-                Find your next journey with us
-              </p>
+            <span className="uppercase tracking-[0.4em] text-sm md:text-base text-white/70">
+              Premium Travel Experience
+            </span>
+
+            <h1 className="mt-5 text-5xl md:text-7xl lg:text-8xl font-black  text-white max-w-5xl">
+              {slides[current].title}
+            </h1>
+
+            <p className="mt-6 text-lg md:text-2xl text-gray-300 leading-relaxed max-w-3xl">
+              {slides[current].subtitle}
+            </p>
+
+            {/* Buttons */}
+            <div className="mt-10 flex flex-wrap justify-center gap-5">
               <a
                 href="#tourpackages"
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-semibold shadow-lg transition"
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold hover:scale-105 transition duration-300 shadow-2xl"
               >
-                Discover Tours
+                Explore Tours
+              </a>
+
+              <a
+                href="#destinations"
+                className="px-8 py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 transition duration-300"
+              >
+                View Destinations
               </a>
             </div>
-          </div>
-        ))}
+          </motion.div>
+        </div>
       </div>
-
-      {/* Prev Button */}
-      <button
-        onClick={prevSlide}
-        className="absolute top-1/2 left-5 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow-md"
-      >
-        <FaChevronLeft className="text-slate-700" />
-      </button>
-
-      {/* Next Button */}
-      <button
-        onClick={nextSlide}
-        className="absolute top-1/2 right-5 -translate-y-1/2 bg-white/70 hover:bg-white p-3 rounded-full shadow-md"
-      >
-        <FaChevronRight className="text-slate-700" />
-      </button>
 
       {/* Indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
-        {images.map((_, idx) => (
+      <div className="absolute bottom-10 left-1/2 z-30 -translate-x-1/2 flex items-center gap-3">
+        {slides.map((_, index) => (
           <button
-            key={idx}
-            onClick={() => setCurrent(idx)}
-            className={`w-3 h-3 rounded-full ${
-              current === idx ? "bg-blue-600" : "bg-gray-300"
+            key={index}
+            onClick={() => setCurrent(index)}
+            className={`relative overflow-hidden rounded-full transition-all duration-500 ${
+              current === index
+                ? "w-14 h-3 bg-white"
+                : "w-3 h-3 bg-white/40 hover:bg-white/70"
             }`}
-          />
+          >
+            {current === index && (
+              <motion.div
+                layoutId="indicator"
+                className="absolute inset-0 bg-white rounded-full"
+              />
+            )}
+          </button>
         ))}
       </div>
-    </div>
-  );
-};
 
-export default Carousel;
+      {/* Slide Counter */}
+      <div className="absolute bottom-10 right-10 z-30 text-white/70 text-sm tracking-[0.3em]">
+        0{current + 1} / 0{slides.length}
+      </div>
+
+      {/* Socials */}
+      <div className="absolute left-8 bottom-10 z-30 hidden md:flex flex-col gap-4 text-white/60">
+        <span className="rotate-[-90deg] origin-left text-xs tracking-[0.4em]">
+          FOLLOW US
+        </span>
+      </div>
+    </section>
+  );
+}

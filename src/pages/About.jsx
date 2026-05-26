@@ -5,7 +5,7 @@ const About = () => {
     <div className="mt-10 md:mt-16 mb-20 md:mb-32">
       <section
         id="about"
-        className="max-w-screen-xl mx-auto px-5 sm:px-6 py-16 md:py-24 overflow-hidden"
+        className="max-w-screen-xl mx-auto px-5 sm:px-6 py-20 md:py-24 overflow-hidden"
       >
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* LEFT CONTENT */}

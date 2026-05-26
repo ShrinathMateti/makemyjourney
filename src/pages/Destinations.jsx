@@ -19,11 +19,8 @@ const Destinations = () => {
   return (
     <section
       id="destinations"
-      className="relative overflow-hidden py-24 bg-slate-50"
+      className="relative overflow-hidden py-24 bg-white"
     >
-      {/* Background Blur */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-slate-200 rounded-full blur-3xl opacity-50"></div>
-
       <div className="max-w-screen-xl mx-auto px-6">
         {/* HEADER */}
         <motion.div

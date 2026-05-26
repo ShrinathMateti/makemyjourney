@@ -1,19 +1,17 @@
 import { useState } from "react";
-import { FaLocationArrow, FaEnvelope } from "react-icons/fa";
-import { IoIosCall } from "react-icons/io";
+import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const [loading, setLoading] = useState(false);
-
-  // Handle Input Change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,17 +19,14 @@ const Contact = () => {
     });
   };
 
-  // Handle Submit
-  const sendEmail = (e) => {
+  const sendMessage = (e) => {
     e.preventDefault();
 
     setLoading(true);
 
-    // Toast Message
-    toast.success("📨 Your message has been submitted!");
-
-    // Reset Form
     setTimeout(() => {
+      toast.success("Message sent successfully ✈️");
+
       setFormData({
         name: "",
         email: "",
@@ -43,175 +38,123 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-slate-800" id="contact">
-      {/* Toast */}
+    <section id="contact" className="bg-white py-24 px-6">
       <ToastContainer position="top-right" autoClose={3000} />
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <p className="text-xl uppercase tracking-[4px] text-slate-500 font-medium mb-2">
+            Contact Us
+          </p>
+        </motion.div>
 
-      {/* Heading */}
-      <section className="text-white py-10 md:py-14 px-5">
-        <h1 className="text-center mt-6 font-semibold text-3xl sm:text-4xl">
-          Get In Touch
-        </h1>
+        {/* Main Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 lg:grid-cols-2 items-stretch overflow-hidden rounded-[32px] bg-white shadow-2xl border border-slate-200"
+        >
+          {/* Left Image - Hidden On Mobile */}
+          <div className="relative hidden lg:flex h-full min-h-[520px] overflow-hidden group">
+            <img
+              src="contact.jpg"
+              alt="Travel"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700"
+            />
 
-        <p className="text-center text-sm sm:text-lg text-slate-300 mt-3">
-          Have any queries? Get in touch today.
-        </p>
-      </section>
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/30" />
 
-      {/* Main Section */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-20 pb-14 md:pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
-          {/* LEFT SIDE - Hidden On Mobile */}
-          <div className="hidden md:grid grid-cols-1 gap-5">
-            {/* IMAGE CARD */}
-            <div className="relative overflow-hidden rounded-[30px] h-[260px] group shadow-2xl">
-              {/* Image */}
-              <img
-                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e"
-                alt="Travel"
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent"></div>
-
-              {/* Content */}
-              <div className="absolute bottom-6 left-6 z-10">
-                <p className="text-white/70 text-sm tracking-[3px] uppercase mb-2">
-                  Explore
+            {/* Content */}
+            <div className="relative z-10 flex flex-col justify-end w-full p-8 md:p-10">
+              <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[26px] p-6">
+                <p className="uppercase tracking-[0.3em] text-[10px] text-white/70 mb-3">
+                  Premium Travel
                 </p>
 
-                <h2 className="text-white text-3xl font-bold leading-tight">
-                  Travel Beyond <br /> Boundaries
+                <h2 className="text-3xl md:text-4xl font-black text-white leading-tight">
+                  Explore The World
                 </h2>
-              </div>
-            </div>
 
-            {/* CONTACT CARD */}
-            <div className="bg-slate-800 rounded-[30px] overflow-hidden border border-white/15 shadow-2xl">
-              
-
-              {/* Contact Info */}
-              <div className="p-4 space-y-5">
-                {/* Address */}
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0 backdrop-blur-lg">
-                    <FaLocationArrow className="text-white text-sm" />
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-slate-400">Address</p>
-
-                    <h4 className="font-semibold text-white">INDIA</h4>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0 backdrop-blur-lg">
-                    <FaEnvelope className="text-white text-sm" />
-                  </div>
-
-                  <div className="min-w-0">
-                    <p className="text-sm text-slate-400">E-mail</p>
-
-                    <h4 className="font-semibold text-white truncate">
-                      makemyjourney@info
-                    </h4>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0 backdrop-blur-lg">
-                    <IoIosCall className="text-white text-base" />
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-slate-400">Phone</p>
-
-                    <h4 className="font-semibold text-white">+91 1233222324</h4>
-                  </div>
-                </div>
+                <p className="mt-4 text-sm text-white/70 leading-7">
+                  Discover luxury destinations and unforgettable travel
+                  experiences.
+                </p>
               </div>
             </div>
           </div>
 
-          {/* RIGHT SIDE - FORM */}
-          <div className="bg-slate-100 p-5 sm:p-6 md:p-8 rounded-2xl shadow-xl w-full">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-800 mb-6">
-              Send a Message
-            </h2>
+          {/* Right Form */}
+          <div className="bg-white h-full flex items-center justify-center p-8 md:p-10">
+            <div className="w-full max-w-md">
+              {/* Title */}
+              <div className="mb-6">
+                <h2 className="text-3xl font-black text-slate-900">
+                  Send Message
+                </h2>
 
-            <form onSubmit={sendEmail} className="space-y-5">
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-medium text-slate-600 mb-2">
-                  Name
-                </label>
+                <p className="mt-3 text-sm text-slate-500 leading-6">
+                  We’ll get back to you shortly.
+                </p>
+              </div>
 
+              {/* Form */}
+              <form onSubmit={sendMessage} className="space-y-4">
                 <input
                   type="text"
                   name="name"
+                  required
                   value={formData.name}
                   onChange={handleChange}
-                  required
-                  placeholder="Your Name"
-                  className="w-full p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-800"
+                  placeholder="Full Name"
+                  className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 transition"
                 />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-slate-600 mb-2">
-                  Email
-                </label>
 
                 <input
                   type="email"
                   name="email"
+                  required
                   value={formData.email}
                   onChange={handleChange}
-                  required
-                  placeholder="you@example.com"
-                  className="w-full p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-800"
+                  placeholder="Email Address"
+                  className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 transition"
                 />
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block text-sm font-medium text-slate-600 mb-2">
-                  Message
-                </label>
 
                 <textarea
+                  rows="4"
                   name="message"
-                  rows="2"
+                  required
                   value={formData.message}
                   onChange={handleChange}
-                  required
                   placeholder="Write your message..."
-                  className="w-full p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-800 resize-none"
+                  className="w-full p-4 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 transition resize-none"
                 />
-              </div>
 
-              {/* Button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full py-3 rounded-xl text-white font-medium transition duration-300 ${
-                  loading
-                    ? "bg-slate-500 cursor-not-allowed"
-                    : "bg-slate-800 hover:bg-slate-700 cursor-pointer"
-                }`}
-              >
-                {loading ? "Sending..." : "Send Message"}
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={`w-full h-12 rounded-xl text-white font-semibold text-sm cursor-pointer transition duration-300 ${
+                    loading
+                      ? "bg-blue-600 cursor-not-allowed"
+                      : "bg-blue-600 hover:bg-blue-700"
+                  }`}
+                >
+                  {loading ? "Sending..." : "Send Message"}
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

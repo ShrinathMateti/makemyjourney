@@ -1,17 +1,17 @@
 const CarRent = () => {
   return (
-    <div id="car-rent" className="bg-blue-100 py-22">
+    <div id="car-rent" className="py-22">
       <section>
         <div className="text-center px-6">
           {/* SMALL LABEL */}
-          <p className="text-sm uppercase tracking-[4px] text-slate-500 font-medium mb-4">
+          <p className="text-xl uppercase tracking-[4px] text-slate-500 font-medium mb-4">
             Car Rentals
           </p>
 
           {/* TITLE */}
           <h1 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
             Travel In Comfort
-            <span className="block text-slate-500 mt-2">With Premium Cars</span>
+            <span className="block text-blue-600 mt-2">With Premium Cars</span>
           </h1>
 
           {/* LINE */}
