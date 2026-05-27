@@ -139,10 +139,10 @@ const Navbar = () => {
                 {/* Mobile CTA */}
                 <li className="mt-4">
                   <a
-                    href="#booking"
+                    href="#contact"
                     className="block text-center px-6 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold shadow-lg"
                   >
-                    Book Your Trip
+                    Book Now
                   </a>
                 </li>
               </ul>
